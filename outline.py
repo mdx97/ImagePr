@@ -20,40 +20,39 @@ def pixelDifference(pix1_val, pix2_val):
     diff_b = colorDifference(pix1_val[2], pix2_val[2])
     return (diff_r + diff_g + diff_b) / 3
 
-def outline(file, min_diff):
-    img = Image.open(file)
-    pixels = pixelValues(img)
-    profiles = [[PixelProfile() for x in range(img.width)] for y in range(img.height)]
-    
-    for i in range(img.height):
-        for j in range(img.width):
-            profile = PixelProfile()
-            pixel_val = pixels[i][j]
+file_path = "files/pepsi.jpg"
+min_diff = 15
+img = Image.open(file_path)
+pixels = pixelValues(img)
+profiles = [[PixelProfile() for x in range(img.width)] for y in range(img.height)]
 
-            if (i > 0):
-                profile.diff_top = pixelDifference(pixel_val, pixels[i - 1][j])
-            if (i < len(pixels) - 1):
-                profile.diff_bot = pixelDifference(pixel_val, pixels[i + 1][j])
-            if (j > 0):
-                profile.diff_left = pixelDifference(pixel_val, pixels[i][j - 1])
-            if (j < len(pixels[i]) - 1):
-                profile.diff_right = pixelDifference(pixel_val, pixels[i][j + 1])
+for i in range(img.height):
+    for j in range(img.width):
+        profile = PixelProfile()
+        pixel_val = pixels[i][j]
 
-            profiles[i][j] = profile
+        if (i > 0):
+            profile.diff_top = pixelDifference(pixel_val, pixels[i - 1][j])
+        if (i < len(pixels) - 1):
+            profile.diff_bot = pixelDifference(pixel_val, pixels[i + 1][j])
+        if (j > 0):
+            profile.diff_left = pixelDifference(pixel_val, pixels[i][j - 1])
+        if (j < len(pixels[i]) - 1):
+            profile.diff_right = pixelDifference(pixel_val, pixels[i][j + 1])
 
-    for i in range(img.height):
-        for j in range(img.width):
-            profile = profiles[i][j]
+        profiles[i][j] = profile
 
-            if (profile.diff_top >= min_diff):
-                pixels[i + 1][j] = (0, 0, 0)
-            if (profile.diff_bot >= min_diff):
-                pixels[i - 1][j] = (0, 0, 0)
-            if (profile.diff_left >= min_diff):
-                pixels[i][j - 1] = (0, 0, 0)
-            if (profile.diff_right >= min_diff):
-                pixels[i][j + 1] = (0, 0, 0)
+for i in range(img.height):
+    for j in range(img.width):
+        profile = profiles[i][j]
 
-    savePixelsToImage("files/edit.jpg", pixels)
+        if (profile.diff_top >= min_diff):
+            pixels[i + 1][j] = (0, 0, 0)
+        if (profile.diff_bot >= min_diff):
+            pixels[i - 1][j] = (0, 0, 0)
+        if (profile.diff_left >= min_diff):
+            pixels[i][j - 1] = (0, 0, 0)
+        if (profile.diff_right >= min_diff):
+            pixels[i][j + 1] = (0, 0, 0)
 
-outline("files/pepsi.jpg", 15)
+savePixelsToImage("files/outlined.jpg", pixels)
