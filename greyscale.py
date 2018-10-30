@@ -1,7 +1,7 @@
 # Usage: python greyscale.py <file>
 import sys
 from PIL import Image
-from pr_common import *
+from pr_common import filePath, pixelValues, editedFilePath, greyValue, savePixelsToImage
 
 file_name = sys.argv[1]
 file_path = filePath(file_name)
