@@ -2,7 +2,7 @@
 # *minimum difference - Minimum % difference between adjacent pixels in order for an outline to be created
 import sys
 from PIL import Image
-from pr_common import pixelValues, savePixelsToImage
+from pr_common import *
 
 class PixelProfile:
     diff_top = 0
@@ -23,7 +23,8 @@ def pixelDifference(pix1_val, pix2_val):
     diff_b = colorDifference(pix1_val[2], pix2_val[2])
     return (diff_r + diff_g + diff_b) / 3
 
-file_path = "files/" + str(sys.argv[1])
+file_name = sys.argv[1]
+file_path = filePath(file_name)
 min_diff = int(sys.argv[2])
 img = Image.open(file_path)
 pixels = pixelValues(img)
@@ -58,4 +59,4 @@ for i in range(img.height):
         if (profile.diff_right >= min_diff):
             pixels[i][j + 1] = (0, 0, 0)
 
-savePixelsToImage("files/outlined.jpg", pixels)
+savePixelsToImage(editedFilePath(file_name, "outline"), pixels)

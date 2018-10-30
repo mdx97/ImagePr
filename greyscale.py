@@ -1,21 +1,15 @@
 # Usage: python greyscale.py <file>
 import sys
 from PIL import Image
-from pr_common import pixelValues, savePixelsToImage
+from pr_common import *
 
-file_path = "files/" + str(sys.argv[1])
+file_name = sys.argv[1]
+file_path = filePath(file_name)
 img = Image.open(file_path)
 pixels = pixelValues(img)
-
-def colorAverage(pixel_val):
-    return (pixel_val[0] + pixel_val[1] + pixel_val[2]) // 3
-
-def greyValue(pixel_val):
-    grey_mag = colorAverage(pixel_val)
-    return (grey_mag, grey_mag, grey_mag)
 
 for i in range(img.height):
     for j in range(img.width):
         pixels[i][j] = greyValue(pixels[i][j])
 
-savePixelsToImage("files/greyscale.jpg", pixels)
+savePixelsToImage(editedFilePath(file_name, "greyscale"), pixels)
