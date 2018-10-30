@@ -1,7 +1,9 @@
+# Usage: python greyscale.py <file>
+import sys
 from PIL import Image
 from pr_common import pixelValues, savePixelsToImage
 
-file_path = "files/linux_vm.jpg"
+file_path = "files/" + str(sys.argv[1])
 img = Image.open(file_path)
 pixels = pixelValues(img)
 
