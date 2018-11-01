@@ -1,6 +1,8 @@
+# Usage: python conditional_greyscale.py <file> <color*>
+# *color - This value can be R, G, or B. This indicates what general color will be ignored when creating the greyscale image.
 import sys
 from PIL import Image
-from pr_common import *
+from pr_common import filePath, pixelValues, greyValue, savePixelsToImage, editedFilePath
 
 def generalizedColor(pixel_val):
     color = "R"

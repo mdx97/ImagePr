@@ -2,7 +2,7 @@
 # *minimum difference - Minimum % difference between adjacent pixels in order for an outline to be created
 import sys
 from PIL import Image
-from pr_common import *
+from pr_common import filePath, pixelValues, savePixelsToImage, editedFilePath
 
 class PixelProfile:
     diff_top = 0
