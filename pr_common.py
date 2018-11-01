@@ -39,7 +39,6 @@ def removeExtension(file_name):
     return file_name[0:file_name.index('.')]
 
 # Other
-def getFilePixels(file_name):
+def getImage(file_name):
     file_path = filePath(file_name)
-    img = Image.open()
-    return pixelValues(img)
+    return Image.open(file_path)

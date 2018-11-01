@@ -4,7 +4,8 @@ from PIL import Image
 from pr_common import *
 
 file_name = sys.argv[1]
-pixels = getFilePixels(file_name)
+img = getImage(file_name)
+pixels = pixelValues(img)
 
 for i in range(img.height):
     for j in range(img.width):
