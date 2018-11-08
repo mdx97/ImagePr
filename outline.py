@@ -24,9 +24,8 @@ def pixelDifference(pix1_val, pix2_val):
     return (diff_r + diff_g + diff_b) / 3
 
 file_name = sys.argv[1]
-file_path = filePath(file_name)
 min_diff = int(sys.argv[2])
-img = Image.open(file_path)
+img = getImage(file_name)
 pixels = pixelValues(img)
 profiles = [[PixelProfile() for x in range(img.width)] for y in range(img.height)]
 

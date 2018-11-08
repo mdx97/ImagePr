@@ -4,8 +4,7 @@ from PIL import Image
 from pr_common import filePath, pixelValues, editedFilePath, greyValue, savePixelsToImage
 
 file_name = sys.argv[1]
-file_path = filePath(file_name)
-img = Image.open(file_path)
+img = getImage(file_name)
 pixels = pixelValues(img)
 
 for i in range(img.height):

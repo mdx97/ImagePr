@@ -17,9 +17,8 @@ def generalizedColor(pixel_val):
     return color
 
 file_name = sys.argv[1]
-file_path = filePath(file_name)
 ignore_col = str(sys.argv[2])
-img = Image.open(file_path)
+img = getImage(file_name)
 pixels = pixelValues(img)
 
 for i in range(img.height):
